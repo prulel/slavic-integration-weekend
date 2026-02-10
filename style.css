@@ -1,0 +1,1590 @@
+/* ========================================
+   CSS Reset & Variables (Reset i Zmienne)
+   ======================================== */
+* {
+    margin: 0;
+    /* Usuwa wszystkie domyślne marginesy przeglądarki */
+    padding: 0;
+    /* Usuwa wszystkie domyślne paddingi przeglądarki */
+    box-sizing: border-box;
+    /* Szerokość/wysokość elementu ZAWIERA padding i border (łatwiejsze obliczenia) */
+}
+
+:root {
+    /* Brand Colors (Kolory marki ESN) */
+    --color-blue: #2e3192;
+    /* Główny niebieski kolor ESN */
+    --color-green: #7ac143;
+    /* Zielony kolor ESN */
+    --color-orange: #f47b20;
+    /* Pomarańczowy kolor ESN */
+    --color-white: #ffffff;
+    /* Biały */
+    --color-cyan: #00aeef;
+    /* Cyjan/jasny niebieski */
+    --color-magenta: #ec008c;
+    /* Różowy/magenta */
+    --color-black: #000000;
+    /* Czarny */
+
+    /* Neutral Colors (Kolory neutralne) */
+    --color-gray-light: #f8f9fa;
+    /* Bardzo jasny szary do tła */
+    --color-gray-medium: #e9ecef;
+    /* Średni szary do obramowań */
+    --color-gray-dark: #333333;
+    /* Ciemny szary do tekstu */
+
+    /* Gradients - More Subtle (Gradienty - subtelniejsze) */
+    --gradient-primary: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan) 100%);
+    /* Gradient niebieski->cyjan */
+    --gradient-accent: linear-gradient(135deg, var(--color-orange) 0%, var(--color-magenta) 100%);
+    /* Gradient pomarańczowy->różowy */
+
+    /* Typography (Czcionki) */
+    --font-primary: 'Lato', sans-serif;
+    /* Główna czcionka strony */
+
+    /* Generous Spacing (Odstępy - hojne jak w nowoczesnych designach) */
+    --spacing-xs: 0.5rem;
+    /* Extra mały odstęp (8px) */
+    --spacing-sm: 1rem;
+    /* Mały odstęp (16px) */
+    --spacing-md: 2rem;
+    /* Średni odstęp (32px) */
+    --spacing-lg: 4rem;
+    /* Duży odstęp (64px) */
+    --spacing-xl: 6rem;
+    /* Extra duży odstęp (96px) */
+    --spacing-xxl: 8rem;
+    /* Extra extra duży odstęp (128px) */
+    --spacing-xxxl: 10rem;
+    /* Extra extra extra duży odstęp (160px) */
+
+    /* Transitions (Animacje przejścia) */
+    --transition-fast: 0.2s ease;
+    /* Szybka animacja (0.2 sekundy) */
+    --transition-medium: 0.3s ease;
+    /* Średnia animacja (0.3 sekundy) */
+    --transition-slow: 0.5s ease;
+    /* Wolna animacja (0.5 sekundy) */
+
+    /* Shadows - More Subtle (Cienie - subtelniejsze) */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Mały, delikatny cień */
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+    /* Średni cień */
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* Duży cień */
+}
+
+/* ========================================
+   Base Styles (Style bazowe)
+   ======================================== */
+html {
+    scroll-behavior: smooth;
+    /* Płynne scrollowanie przy kliknięciu w linki do sekcji */
+}
+
+body {
+    font-family: var(--font-primary);
+    /* Użyj czcionki Lato */
+    line-height: 1.8;
+    /* Odstęp między liniami tekstu (180% wysokości czcionki) - lepsze czytanie */
+    color: var(--color-black);
+    /* Domyślny kolor tekstu - czarny */
+    background: var(--color-white);
+    /* Tło strony - białe */
+    overflow-x: hidden;
+    /* Ukryj poziomy scrollbar (zapobiega przesuwaniu w lewo/prawo) */
+    font-size: 18px;
+    /* Bazowy rozmiar czcionki (większy = łatwiej czytać) */
+}
+
+.container {
+    max-width: 1400px;
+    /* Maksymalna szerokość contenera (nie będzie szersza niż 1400px) */
+    margin: 0 auto;
+    /* Wyśrodkowanie (automatyczne marginesy po bokach) */
+    padding: 0 var(--spacing-lg);
+    /* Padding po bokach (64px) - odstęp od krawędzi */
+}
+
+/* ========================================
+   Navigation - Minimalist (Nawigacja - minimalistyczna)
+   ======================================== */
+.navbar {
+    position: fixed;
+    /* Pasek "przyklejony" - zawsze widoczny mimo scrollowania */
+    top: 0;
+    /* Przyczepiony do samej góry */
+    left: 0;
+    /* Od lewej krawędzi */
+    right: 0;
+    /* Do prawej krawędzi (= pełna szerokość) */
+    background: rgba(255, 255, 255, 0.1);
+    /* Przezroczyste tło (10% nieprzezroczystości) */
+    backdrop-filter: blur(10px);
+    /* Rozmycie tła dla efektu szkła */
+    -webkit-backdrop-filter: blur(10px);
+    /* Wsparcie dla Safari */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Delikatny cień */
+    z-index: 900;
+    /* Wysoka wartość = pasek ZAWSZE na wierzchu innych elementów */
+    transition: all var(--transition-medium);
+    /* Płynne animacje przy zmianach (0.3s) */
+}
+
+.nav-container {
+    max-width: 1400px;
+    /* Maksymalna szerokość zawartości nawigacji */
+    margin: 0 auto;
+    /* Wyśrodkowanie */
+    padding: 1rem var(--spacing-lg);
+    /* Padding: 16px góra/dół, 64px lewo/prawo */
+    display: flex;
+    /* Użyj flexbox do układania elementów */
+    justify-content: space-between;
+    /* Logo po lewej, menu po prawej (maksymalny odstęp) */
+    align-items: center;
+    /* Wyrównanie w pionie do środka */
+}
+
+.logo-text {
+    font-size: 1.3rem;
+    /* Rozmiar tekstu logo (20.8px) */
+    font-weight: 700;
+    /* Pogrubienie (bold) */
+    color: var(--color-blue);
+    /* Kolor niebieski ESN */
+    letter-spacing: -0.3px;
+    /* Lekkie zbliżenie liter (tighter spacing) */
+}
+
+.nav-menu {
+    display: flex;
+    /* Elementy menu w rzędzie */
+    gap: var(--spacing-lg);
+    /* Odstęp między linkami (64px) */
+    list-style: none;
+    /* Usuń kropeczki przy elementach listy */
+}
+
+.nav-link {
+    color: var(--color-black);
+    /* Kolor tekstu linku - czarny */
+    text-decoration: none;
+    /* Usuń podkreślenie */
+    font-weight: 400;
+    /* Normal weight (nie bold) */
+    font-size: 0.9rem;
+    /* Mniejszy rozmiar czcionki */
+    position: relative;
+    /* Potrzebne do absolutnego pozycjonowania ::after (podkreślenie) */
+    padding: 0.5rem 0;
+    /* Padding góra/dół (8px) - większy obszar klikalny */
+    transition: color var(--transition-fast);
+    /* Płynna zmiana koloru (0.2s) */
+    letter-spacing: 0.5px;
+    /* Lekko rozstrzelone litery */
+}
+
+.nav-link::after {
+    content: '';
+    /* Pusty element (będzie podkreśleniem) */
+    position: absolute;
+    /* Pozycja względem .nav-link */
+    bottom: 0;
+    /* Na samym dole linku */
+    left: 0;
+    /* Od lewej */
+    width: 0;
+    /* Początkowo niewidoczne (szerokość 0) */
+    height: 1px;
+    /* Wysokość podkreślenia (cieńsza) */
+    background: var(--color-blue);
+    /* Kolor niebieski zamiast różowego */
+    transition: width var(--transition-medium);
+    /* Płynne rozszerzanie (0.3s) */
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+    /* Przy hover lub aktywnym linku - pełna szerokość (podkreślenie pojawia się) */
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--color-blue);
+    /* Zmień kolor tekstu na niebieski przy hover lub aktywny */
+}
+
+.hamburger {
+    display: none;
+    /* Domyślnie ukryty (pokazuje się tylko na mobile) */
+    flex-direction: column;
+    /* Ustawienie pasków w kolumnie */
+    gap: 5px;
+    /* Odstęp między paskami */
+    cursor: pointer;
+    /* Kursor "ręka" przy najechaniu */
+}
+
+.hamburger span {
+    width: 25px;
+    /* Szerokość paska hamburgera */
+    height: 2px;
+    /* Wysokość paska */
+    background: var(--color-blue);
+    /* Kolor niebieski */
+    transition: all var(--transition-fast);
+    /* Płynna animacja (dla transformacji X) */
+    border-radius: 2px;
+    /* Lekkie zaokrąglenie rogów */
+}
+
+/* ========================================
+   Hero Section - Clean & Bold (Sekcja główna - czysta i wyrazista)
+   ======================================== */
+.hero {
+    position: relative;
+    /* Potrzebne dla absolutnego pozycjonowania .hero-background */
+    min-height: 100vh;
+    /* Minimalna wysokość = 100% wysokości viewport (pełny ekran) */
+    display: flex;
+    /* Flexbox do centrowania zawartości */
+    align-items: center;
+    /* Wyrównanie w pionie do środka */
+    justify-content: center;
+    /* Wyrównanie w poziomie do środka */
+    overflow: hidden;
+    /* Ukryj to co wychodzi poza (np. parallax) */
+    padding: 100px 0 40px;
+    /* Padding: 100px góra (navbar 80px + 20px), 40px dół - bardziej kompaktowo */
+}
+
+.hero-background {
+    position: absolute;
+    /* Pozycjonowanie absolutne (tło za tekstem) */
+    top: 0;
+    /* Od samej góry */
+    left: 0;
+    /* Od lewej */
+    width: 100%;
+    /* Pełna szerokość */
+    height: 100%;
+    /* Pełna wysokość */
+    background-image: url('marzec - 2025 (IMG_4650).jpg');
+    /* Twoje zdjęcie grupowe! */
+    background-size: cover;
+    /* Rozciągnij zdjęcie aby pokryło cały obszar */
+    background-position: center;
+    /* Wycentruj zdjęcie */
+    background-repeat: no-repeat;
+    /* Nie powtarzaj zdjęcia */
+    z-index: -1;
+    /* Pod tekstem (niższa wartość = niżej w stosie) */
+}
+
+.hero-background::after {
+    content: '';
+    /* Pusty element (będzie nakładką gradientu) */
+    position: absolute;
+    /* Pozycja względem .hero-background */
+    top: 0;
+    /* Od góry */
+    left: 0;
+    /* Od lewej */
+    width: 100%;
+    /* Pełna szerokość */
+    height: 100%;
+    /* Pełna wysokość */
+    background: linear-gradient(135deg, rgba(46, 49, 146, 0.85) 0%, rgba(0, 174, 239, 0.75) 100%);
+    /* Niebieski gradient z przezroczystością - przyciemnia zdjęcie */
+    z-index: 1;
+    /* Nad zdjęciem, pod tekstem */
+}
+
+.hero-content {
+    text-align: center;
+    /* Wyśrodkuj tekst */
+    color: var(--color-white);
+    /* Biały kolor tekstu */
+    z-index: 2;
+    /* Nad zdjęciem i gradientem */
+    max-width: 1200px;
+    /* Maksymalna szerokość contentu */
+    padding: 0 var(--spacing-md);
+    /* Padding po bokach (32px) */
+    position: relative;
+    /* Potrzebne dla z-index */
+}
+
+.hero-header {
+    display: flex;
+    /* Flexbox - logo i tytuł w kolumnie */
+    flex-direction: column;
+    /* Elementy jeden pod drugim (logo nad tytułem) */
+    align-items: center;
+    /* Wyrównaj w poziomie do środka */
+    justify-content: center;
+    /* Wyśrodkuj */
+    gap: var(--spacing-md);
+    /* Mniejszy odstęp między logo a tytułem (32px) */
+    margin-bottom: var(--spacing-md);
+    /* Mniejszy odstęp pod headerem (32px) */
+}
+
+.hero-logo {
+    width: 120px;
+    /* Szerokość logo */
+    height: 120px;
+    /* Wysokość logo */
+    object-fit: contain;
+    /* Zachowaj proporcje obrazka - nie rozciągaj */
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    /* Cień dla lepszej widoczności na tle */
+}
+
+.hero-title {
+    font-size: clamp(2rem, 6vw, 4rem);
+    /* Responsywny rozmiar: min 2rem (32px), preferowane 6% viewport width, max 4rem (64px) */
+    font-weight: 900;
+    /* Maksymalne pogrubienie (black) */
+    line-height: 1.1;
+    /* Ciasny odstęp między liniami (110%) */
+    margin: 0;
+    /* Bez marginesu */
+    letter-spacing: -1px;
+    /* Zbliżone litery (tighter) */
+    color: var(--color-white);
+    /* Biały */
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    /* Cień tekstu dla lepszej czytelności na zdjęciu */
+    text-transform: uppercase;
+    /* WIELKIE LITERY */
+}
+
+.title-line {
+    display: block;
+    /* Każdy span w nowej linii */
+}
+
+.event-date {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    /* Responsywny rozmiar daty */
+    font-weight: 400;
+    /* Normal weight */
+    color: var(--color-white);
+    /* Biały */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    /* Cień tekstu */
+    margin-bottom: var(--spacing-lg);
+    /* Mniejszy odstęp pod datą (64px zamiast 96px) */
+    letter-spacing: 2px;
+    /* Rozstrzelone litery */
+    text-transform: uppercase;
+    /* WIELKIE LITERY */
+}
+
+.countdown {
+    display: flex;
+    /* Flexbox - elementy obok siebie */
+    align-items: center;
+    /* Wyrównaj w pionie */
+    justify-content: center;
+    /* Wyśrodkuj */
+    gap: var(--spacing-sm);
+    /* Mniejszy odstęp między elementami (16px zamiast 32px) */
+    flex-wrap: wrap;
+    /* Zawijaj na mniejszych ekranach */
+}
+
+.countdown-item {
+    text-align: center;
+    /* Wyśrodkuj tekst */
+}
+
+.countdown-number {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    /* Duże liczby */
+    font-weight: 900;
+    /* Maksymalne pogrubienie */
+    color: var(--color-white);
+    /* Biały */
+    line-height: 1;
+    /* Ciasny odstęp */
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    /* Cień */
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    /* Mały rozmiar */
+    color: rgba(255, 255, 255, 0.8);
+    /* Przezroczysty biały */
+    text-transform: uppercase;
+    /* WIELKIE LITERY */
+    letter-spacing: 2px;
+    /* Rozstrzelone litery */
+    margin-top: var(--spacing-xs);
+    /* Odstęp nad label (8px) */
+}
+
+.countdown-separator {
+    font-size: clamp(2rem, 4vw, 3rem);
+    /* Rozmiar separatora */
+    color: rgba(255, 255, 255, 0.5);
+    /* Przezroczysty biały */
+    font-weight: 300;
+    /* Light */
+}
+
+.scroll-indicator {
+    display: none;
+    /* Ukryty (nie używany w tym designie) */
+}
+
+/* ========================================
+   Vertical Section Labels (Pionowe etykiety sekcji)
+   ======================================== */
+.section-label {
+    position: absolute;
+    /* Pozycjonowanie absolutne (pionowy tekst z boku) */
+    left: var(--spacing-md);
+    /* 32px od lewej */
+    top: 50%;
+    /* Na środku wysokości */
+    transform: translateY(-50%) rotate(-90deg);
+    /* Przesuń do środka i obróć o 90° (pionowo) */
+    transform-origin: center;
+    /* Punkt obrotu = środek */
+    font-weight: 900;
+    /* Maksymalne pogrubienie */
+    font-size: 0.9rem;
+    /* Mały rozmiar */
+    letter-spacing: 3px;
+    /* Mocno rozstrzelone litery */
+    text-transform: uppercase;
+    /* WIELKIE LITERY */
+    color: var(--color-magenta);
+    /* Różowy */
+    opacity: 0.6;
+    /* 60% przezroczystości (delikatny efekt) */
+}
+
+/* ========================================
+   Section Styles - Generous Spacing (Style sekcji - duże odstępy)
+   ======================================== */
+.section-header {
+    margin-bottom: var(--spacing-xl);
+    /* Odstęp pod nagłówkiem (96px) */
+}
+
+.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    /* Responsywny: min 1.8rem, preferowane 4vw, max 2.5rem - mniejszy */
+    font-weight: 700;
+    /* Bold (nie black) */
+    margin-bottom: var(--spacing-xl);
+    /* Więcej miejsca pod nagłówkiem (96px) */
+    color: var(--color-black);
+    /* Czarny */
+    letter-spacing: 0px;
+    /* Normalne odstępy między literami */
+    line-height: 1.2;
+    /* Odstęp między liniami */
+    text-transform: uppercase;
+    /* WIELKIE LITERY */
+}
+
+.title-underline {
+    display: none;
+    /* Ukryj podkreślenie - nie używamy go w stylu MLSS */
+}
+
+.section-description {
+    font-size: 1.3rem;
+    /* Większy tekst opisu (23.4px) */
+    color: var(--color-gray-dark);
+    /* Ciemnoszary */
+    margin-top: var(--spacing-md);
+    /* Odstęp nad opisem (32px) */
+    line-height: 1.7;
+    /* Odstęp między liniami */
+}
+
+/* ========================================
+   About Section - Split Layout (Sekcja "O nas" - podzielony układ)
+   ======================================== */
+.about-section {
+    padding: var(--spacing-lg) 0;
+    /* Padding: 64px góra/dół (zmniejszone dla mniejszych odstępów), 0 lewo/prawo */
+    background: var(--color-white);
+    /* Białe tło */
+    position: relative;
+    /* Dla absolutnych dzieci (jeśli są) */
+}
+
+.about-content {
+    display: grid;
+    /* CSS Grid layout */
+    grid-template-columns: 45% 55%;
+    /* Dwie kolumny: zdjęcie 45%, tekst 55% */
+    gap: var(--spacing-xl);
+    /* Odstęp między kolumnami (96px) */
+    align-items: center;
+    /* Wyrównaj w pionie do środka */
+    padding: 0 var(--spacing-lg);
+    /* Padding po bokach (64px) */
+    max-width: 1400px;
+    /* Maksymalna szerokość */
+    margin: 0 auto;
+    /* Wyśrodkowanie */
+}
+
+.about-image {
+    width: 100%;
+    /* Pełna szerokość kolumny */
+    height: 600px;
+    /* Stała wysokość obrazka */
+    object-fit: cover;
+    /* Przytnij zdjęcie żeby wypełniło cały obszar (zachowując proporcje) */
+    border-radius: 4px;
+    /* Lekko zaokrąglone rogi */
+}
+
+.about-text {
+    padding: var(--spacing-lg);
+    /* Padding wokół tekstu (64px) */
+}
+
+.about-text::before {
+    display: none;
+    /* Ukryj pseudo-element (nie używany) */
+}
+
+.lead-text {
+    font-size: 1.5rem;
+    /* Większy tekst wprowadzający (27px) */
+    font-weight: 600;
+    /* Semi-bold */
+    color: var(--color-blue);
+    /* Niebieski */
+    margin-bottom: var(--spacing-lg);
+    /* Odstęp pod tekstem (64px) */
+    line-height: 1.6;
+    /* Odstęp między liniami */
+}
+
+.about-text p {
+    margin-bottom: var(--spacing-md);
+    /* Odstęp między paragrafami (32px) */
+    color: var(--color-gray-dark);
+    /* Ciemnoszary */
+    font-size: 1.1rem;
+    /* Trochę większy tekst (19.8px) */
+    line-height: 1.8;
+    /* Odstęp między liniami */
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+    /* Ostatni paragraf bez marginesu na dole */
+}
+
+/* ========================================
+   Details Section - Horizontal Layouts (Sekcja szczegółów - poziome układy)
+   ======================================== */
+.details-section {
+    padding: var(--spacing-xxxl) 0;
+    /* Padding: 160px góra/dół */
+    background: var(--color-gray-light);
+    /* Jasnoszare tło */
+}
+
+.details-grid {
+    display: grid;
+    /* CSS Grid - 3 kolumny obok siebie */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 równe kolumny */
+    gap: var(--spacing-lg);
+    /* Odstęp między kartami (64px) */
+    margin-top: var(--spacing-xl);
+    /* Odstęp nad gridem (96px) */
+}
+
+.detail-card {
+    background: transparent;
+    /* Przezroczyste tło zamiast białego */
+    padding: var(--spacing-xl) var(--spacing-md);
+    /* Mniejszy padding po bokach */
+    display: flex;
+    /* Flexbox do układania ikony i tekstu */
+    flex-direction: column;
+    /* Ikona nad tekstem */
+    align-items: center;
+    /* Wyśrodkuj w poziomie */
+    text-align: center;
+    /* Wyśrodkuj tekst */
+    gap: var(--spacing-lg);
+    /* Większy odstęp między ikoną a tekstem (64px) */
+    transition: all var(--transition-medium);
+    /* Płynne animacje */
+    border: none;
+    /* Bez obramówki */
+    box-shadow: none;
+    /* Bez cienia */
+    border-radius: 0;
+    /* Bez zaokrągleń */
+}
+
+.detail-card::before {
+    display: none;
+    /* Ukryj pseudo-element */
+}
+
+.detail-card:hover {
+    transform: none;
+    /* Bez ruchu przy hover */
+}
+
+.detail-icon {
+    width: 120px;
+    /* Szerokość kontenera ikony - większa */
+    height: 120px;
+    /* Wysokość kontenera ikony - większa */
+    margin: 0;
+    /* Bez marginesu */
+    background: transparent;
+    /* Przezroczyste tło */
+    border: none;
+    /* Bez borderu */
+    border-radius: 0;
+    /* Bez zaokrąglenia */
+    display: flex;
+    /* Flexbox do centrowania ikony SVG */
+    align-items: center;
+    /* Wyśrodkuj w pionie */
+    justify-content: center;
+    /* Wyśrodkuj w poziomie */
+    color: var(--color-blue);
+    /* Niebieski kolor ikony */
+    transition: all var(--transition-medium);
+    /* Płynne animacje */
+}
+
+.detail-card:nth-child(2) .detail-icon {
+    color: var(--color-cyan);
+    /* Druga karta: cyjan ikona */
+}
+
+.detail-card:nth-child(3) .detail-icon {
+    color: var(--color-orange);
+    /* Trzecia karta: pomarańczowa ikona */
+}
+
+.detail-card:hover .detail-icon {
+    transform: scale(1.05);
+    /* Przy hover: lekkie powiększenie */
+}
+
+.detail-content {
+    display: flex;
+    /* Flexbox */
+    flex-direction: column;
+    /* Elementy w kolumnie */
+}
+
+.detail-card h3 {
+    font-size: 1.4rem;
+    /* Rozmiar tytułu karty - mniejszy */
+    font-weight: 700;
+    /* Pogrubienie */
+    margin-bottom: 0.5rem;
+    /* Odstęp pod tytułem */
+    color: var(--color-black);
+    /* Czarny */
+    text-transform: uppercase;
+    /* WIELKIE LITERY */
+    letter-spacing: 0.5px;
+    /* Lekko rozstrzelone */
+}
+
+.tbc {
+    font-size: 1.1rem;
+    /* Rozmiar tekstu "To be confirmed" */
+    color: #999;
+    /* Szary kolor */
+    font-style: italic;
+    /* Kursywa */
+    font-weight: 500;
+    /* Semi-bold */
+    letter-spacing: 0.5px;
+    /* Lekko rozstrzelone litery */
+}
+
+/* ========================================
+   Registration Section (Sekcja zapisów)
+   ======================================== */
+.registration-section {
+    padding: var(--spacing-xxxl) 0;
+    /* Padding: 160px góra/dół */
+    background: var(--color-white);
+    /* Białe tło */
+}
+
+.registration-content {
+    display: flex;
+    /* Flexbox */
+    flex-direction: column;
+    /* Elementy w kolumnie */
+    gap: var(--spacing-xl);
+    /* Odstęp między elementami (96px) */
+    max-width: 800px;
+    /* Maksymalna szerokość (węższy content) */
+    margin: 0 auto;
+    /* Wyśrodkowanie */
+}
+
+.registration-status {
+    text-align: center;
+    /* Wyśrodkuj tekst */
+    padding: var(--spacing-xl);
+    /* Padding wokół (96px) */
+    background: var(--color-gray-light);
+    /* Jasnoszare tło */
+    border-left: 4px solid var(--color-blue);
+    /* Lewy akcent niebieski */
+}
+
+.registration-status h3 {
+    font-size: 2rem;
+    /* Duży tytuł (36px) */
+    font-weight: 700;
+    /* Pogrubienie */
+    color: var(--color-blue);
+    /* Niebieski */
+    margin-bottom: var(--spacing-md);
+    /* Odstęp pod tytułem (32px) */
+}
+
+.registration-status p {
+    font-size: 1.2rem;
+    /* Większy tekst (21.6px) */
+    color: var(--color-gray-dark);
+    /* Ciemnoszary */
+    line-height: 1.6;
+    /* Odstęp między liniami */
+}
+
+.registration-form-placeholder {
+    padding: var(--spacing-xl);
+    /* Padding (96px) */
+    background: var(--color-white);
+    /* Białe tło */
+    border: 2px dashed var(--color-gray-medium);
+    /* Przerywana obramówka (pokazuje że to placeholder) */
+    border-radius: 4px;
+    /* Lekko zaokrąglone rogi */
+    text-align: center;
+    /* Wyśrodkuj tekst */
+    min-height: 300px;
+    /* Minimalna wysokość (miejsce na formułkę) */
+    display: flex;
+    /* Flexbox */
+    align-items: center;
+    /* Wyśrodkuj w pionie */
+    justify-content: center;
+    /* Wyśrodkuj w poziomie */
+}
+
+.registration-form-placeholder .placeholder-text {
+    font-size: 1.3rem;
+    /* Większy tekst */
+    color: #999;
+    /* Szary */
+    font-style: italic;
+    /* Kursywa */
+    font-weight: 500;
+    /* Semi-bold */
+}
+
+/* ========================================
+   Previous Edition Section (Sekcja poprzedniej edycji)
+   ======================================== */
+.previous-edition-section {
+    padding: var(--spacing-xxxl) 0;
+    /* Padding: 160px góra/dół */
+    background: var(--color-gray-light);
+    /* Jasnoszare tło */
+}
+
+.edition-stats {
+    display: grid;
+    /* CSS Grid */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 kolumny obok siebie */
+    gap: var(--spacing-xl);
+    /* Odstęp między statystykami (96px) */
+    margin-bottom: var(--spacing-xl);
+    /* Odstęp pod statystykami */
+    text-align: center;
+    /* Wyśrodkowany tekst */
+}
+
+.stat-item {
+    padding: var(--spacing-lg);
+    /* Padding (64px) */
+}
+
+.stat-number {
+    font-size: 4rem;
+    /* Duże liczby (64px) */
+    font-weight: 900;
+    /* Maksymalne pogrubienie */
+    color: var(--color-blue);
+    /* Niebieski */
+    line-height: 1;
+    /* Ciasny odstęp */
+    margin-bottom: var(--spacing-sm);
+    /* Odstęp pod liczbą */
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    /* Rozmiar label */
+    color: var(--color-gray-dark);
+    /* Ciemnoszary */
+    text-transform: uppercase;
+    /* WIELKIE LITERY */
+    letter-spacing: 1px;
+    /* Rozstrzelone litery */
+}
+
+.edition-content {
+    max-width: 800px;
+    /* Maksymalna szerokość tekstu */
+    margin: 0 auto var(--spacing-xl);
+    /* Wyśrodkowanie i odstęp pod tekstem */
+    text-align: center;
+    /* Wyśrodkowany tekst */
+}
+
+.edition-content p {
+    font-size: 1.1rem;
+    /* Rozmiar tekstu */
+    color: var(--color-gray-dark);
+    /* Ciemnoszary */
+    line-height: 1.8;
+    /* Odstęp między liniami */
+    font-style: italic;
+    /* Kursywa dla placeholdera */
+}
+
+.edition-gallery {
+    display: grid;
+    /* CSS Grid */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 zdjęcia obok siebie */
+    gap: var(--spacing-md);
+    /* Odstęp między zdjęciami (32px) */
+    margin-top: var(--spacing-xl);
+    /* Odstęp nad galerią */
+}
+
+.gallery-item {
+    aspect-ratio: 4/3;
+    /* Proporcje zdjęcia */
+    overflow: hidden;
+    /* Ukryj nadmiar */
+    border-radius: 4px;
+    /* Zaokrąglone rogi */
+}
+
+.gallery-placeholder {
+    width: 100%;
+    /* Pełna szerokość */
+    height: 100%;
+    /* Pełna wysokość */
+    background: var(--color-gray-medium);
+    /* Szare tło placeholder */
+    display: flex;
+    /* Flexbox */
+    align-items: center;
+    /* Wyśrodkuj w pionie */
+    justify-content: center;
+    /* Wyśrodkuj w poziomie */
+    color: #999;
+    /* Szary tekst */
+    font-weight: 600;
+    /* Semi-bold */
+    transition: all var(--transition-medium);
+    /* Płynne animacje */
+}
+
+.gallery-placeholder:hover {
+    background: var(--color-blue);
+    /* Niebieski przy hover */
+    color: var(--color-white);
+    /* Biały tekst */
+}
+
+/* ========================================
+   Organizers Section (Sekcja organizatorów)
+   ======================================== */
+.organizers-section {
+    padding: var(--spacing-xxxl) 0;
+    /* Padding: 160px góra/dół */
+    background: var(--color-white);
+    /* Białe tło */
+}
+
+.organizer-card {
+    display: grid;
+    /* CSS Grid */
+    grid-template-columns: 300px 1fr;
+    /* Logo 300px, reszta flexible */
+    gap: var(--spacing-xl);
+    /* Odstęp (96px) */
+    align-items: center;
+    /* Wyrównaj w pionie */
+    max-width: 1000px;
+    /* Maksymalna szerokość */
+    margin: 0 auto;
+    /* Wyśrodkowanie */
+}
+
+.organizer-image {
+    width: 300px;
+    /* Szerokość */
+    height: 300px;
+    /* Wysokość - kwadrat */
+    border-radius: 8px;
+    /* Zaokrąglone rogi */
+    overflow: hidden;
+    /* Ukryj nadmiar */
+}
+
+.organizer-image-placeholder {
+    width: 100%;
+    /* Pełna szerokość */
+    height: 100%;
+    /* Pełna wysokość */
+    background: var(--color-gray-light);
+    /* Jasnoszare tło */
+    display: flex;
+    /* Flexbox */
+    align-items: center;
+    /* Wyśrodkuj w pionie */
+    justify-content: center;
+    /* Wyśrodkuj w poziomie */
+    color: #999;
+    /* Szary tekst */
+    font-weight: 600;
+    /* Semi-bold */
+    text-align: center;
+    /* Wyśrodkuj tekst */
+    border: 2px dashed var(--color-gray-medium);
+    /* Przerywany border */
+}
+
+.organizer-content h3 {
+    font-size: 2rem;
+    /* Duży tytuł */
+    font-weight: 700;
+    /* Bold */
+    color: var(--color-blue);
+    /* Niebieski */
+    margin-bottom: var(--spacing-md);
+    /* Odstęp pod tytułem */
+    text-transform: uppercase;
+    /* WIELKIE LITERY */
+}
+
+.organizer-content p {
+    font-size: 1.1rem;
+    /* Rozmiar tekstu */
+    color: var(--color-gray-dark);
+    /* Ciemnoszary */
+    line-height: 1.8;
+    /* Odstęp między liniami */
+    margin-bottom: var(--spacing-md);
+    /* Odstęp pod paragrafem */
+}
+
+/* ========================================
+   Partners Section (Sekcja partnerów)
+   ======================================== */
+.partners-section {
+    padding: var(--spacing-xxxl) 0;
+    /* Padding: 160px góra/dół */
+    background: var(--color-white);
+    /* Białe tło */
+}
+
+.partners-content {
+    display: grid;
+    /* CSS Grid */
+    grid-template-columns: 1fr;
+    /* Jedna kolumna (pełna szerokość) */
+    gap: var(--spacing-xl);
+    /* Odstęp między elementami (96px) */
+    margin-top: var(--spacing-xl);
+    /* Odstęp nad contentem (96px) */
+}
+
+.partner-info-card {
+    background: var(--color-gray-light);
+    /* Jasnoszare tło */
+    padding: var(--spacing-xl);
+    /* Padding wokół (96px) */
+    border-radius: 0;
+    /* Ostre rogi */
+    box-shadow: none;
+    /* Bez cienia */
+    border-left: 4px solid var(--color-magenta);
+    /* Lewy akcent różowy (4px) */
+}
+
+.partner-info-card h3 {
+    font-size: 2.5rem;
+    /* Duży tytuł (45px) */
+    font-weight: 900;
+    /* Maksymalne pogrubienie */
+    margin-bottom: var(--spacing-lg);
+    /* Odstęp pod tytułem (64px) */
+    color: var(--color-black);
+    /* Czarny */
+    letter-spacing: -1px;
+    /* Zbliżone litery */
+}
+
+.partner-text-area {
+    color: var(--color-gray-dark);
+    /* Ciemnoszary tekst */
+    line-height: 1.8;
+    /* Odstęp między liniami */
+}
+
+.placeholder-text {
+    font-size: 1.15rem;
+    /* Trochę większy tekst */
+    margin-bottom: var(--spacing-md);
+    /* Odstęp pod paragrafem (32px) */
+}
+
+.partner-benefits {
+    margin-top: var(--spacing-lg);
+    /* Odstęp nad sekcją (64px) */
+    padding: var(--spacing-lg);
+    /* Padding wokół (64px) */
+    background: var(--color-white);
+    /* Białe tło */
+    border-radius: 0;
+    /* Ostre rogi */
+    border-left: 4px solid var(--color-green);
+    /* Lewy akcent zielony */
+}
+
+.partner-benefits h4 {
+    font-size: 1.5rem;
+    /* Rozmiar podtytułu */
+    font-weight: 700;
+    /* Pogrubienie */
+    margin-bottom: var(--spacing-md);
+    /* Odstęp pod tytułem (32px) */
+    color: var(--color-black);
+    /* Czarny */
+}
+
+.partner-benefits ul {
+    list-style: none;
+    /* Usuń domyślne kropki */
+    padding-left: 0;
+    /* Usuń domyślny padding */
+}
+
+.partner-benefits li {
+    padding: 0.7rem 0 0.7rem 2.5rem;
+    /* Padding: 11.2px góra/dół, 0 prawo, 11.2px dół, 40px lewo (miejsce na checkmark) */
+    position: relative;
+    /* Dla absolutnej checkmarki */
+    font-size: 1.1rem;
+    /* Rozmiar tekstu */
+}
+
+.partner-benefits li::before {
+    content: '✓';
+    /* Checkmark (ptaszek) */
+    position: absolute;
+    /* Pozycjonowanie absolutne */
+    left: 0;
+    /* Od lewej */
+    color: var(--color-green);
+    /* Zielony */
+    font-weight: 900;
+    /* Pogrubienie */
+    font-size: 1.4rem;
+    /* Większy checkmark */
+}
+
+.contact-info {
+    margin-top: var(--spacing-lg);
+    /* Odstęp nad sekcją (64px) */
+    padding: var(--spacing-lg);
+    /* Padding (64px) */
+    background: var(--color-white);
+    /* Białe tło */
+    border-radius: 0;
+    /* Ostre rogi */
+    border-left: 4px solid var(--color-cyan);
+    /* Lewy akcent cyjan */
+}
+
+.contact-info h4 {
+    font-size: 1.5rem;
+    /* Rozmiar podtytułu */
+    font-weight: 700;
+    /* Pogrubienie */
+    margin-bottom: var(--spacing-md);
+    /* Odstęp pod tytułem (32px) */
+    color: var(--color-black);
+    /* Czarny */
+}
+
+.current-partners {
+    background: var(--color-white);
+    /* Białe tło */
+    padding: var(--spacing-xl);
+    /* Padding (96px) */
+    border-radius: 0;
+    /* Ostre rogi */
+    box-shadow: none;
+    /* Bez cienia */
+}
+
+.current-partners h3 {
+    font-size: 2.5rem;
+    /* Duży tytuł */
+    font-weight: 900;
+    /* Maksymalne pogrubienie */
+    margin-bottom: var(--spacing-lg);
+    /* Odstęp pod tytułem (64px) */
+    color: var(--color-black);
+    /* Czarny */
+    letter-spacing: -1px;
+    /* Zbliżone litery */
+}
+
+.partners-grid {
+    display: grid;
+    /* CSS Grid */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Automatyczne kolumny: minimum 250px szerokości, tyle ile się zmieści */
+    gap: var(--spacing-lg);
+    /* Odstęp między elementami (64px) */
+}
+
+.partner-placeholder {
+    aspect-ratio: 16/9;
+    /* Proporcje 16:9 (jak wideo) - zachowuje kształt */
+    background: var(--color-gray-light);
+    /* Jasnoszare tło */
+    border-radius: 0;
+    /* Ostre rogi */
+    display: flex;
+    /* Flexbox do centrowania tekstu */
+    align-items: center;
+    /* Wyśrodkuj w pionie */
+    justify-content: center;
+    /* Wyśrodkuj w poziomie */
+    border: 2px dashed #ccc;
+    /* Przerywana obramówka (pokazuje że to placeholder) */
+    transition: all var(--transition-medium);
+    /* Płynne animacje */
+}
+
+.partner-placeholder:hover {
+    border-color: var(--color-cyan);
+    /* Przy hover: cyjan obramówka */
+    background: rgba(0, 174, 239, 0.05);
+    /* Przy hover: bardzo delikatne cyjan tło (5% opacity) */
+    transform: translateY(-5px);
+    /* Przy hover: przesuń 5px w górę */
+}
+
+.partner-logo-placeholder {
+    color: #999;
+    /* Szary kolor tekstu placeholder */
+    font-weight: 600;
+    /* Semi-bold */
+    text-align: center;
+    /* Wyśrodkuj tekst */
+}
+
+/* ========================================
+   Footer - Gradient Background (Stopka - gradientowe tło)
+   ======================================== */
+.footer {
+    background: var(--color-black);
+    /* Czarne tło */
+    color: var(--color-white);
+    /* Biały tekst */
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    /* Padding: 96px góra, 0 boki, 64px dół */
+}
+
+.footer-content {
+    display: grid;
+    /* CSS Grid */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Automatyczne kolumny, minimum 250px */
+    gap: var(--spacing-xl);
+    /* Odstęp między kolumnami (96px) */
+    margin-bottom: var(--spacing-lg);
+    /* Odstęp pod contentem (64px) */
+}
+
+.footer-logo h3 {
+    font-size: 1.5rem;
+    /* Rozmiar tytułu logo */
+    font-weight: 700;
+    /* Pogrubienie */
+    margin-bottom: 0.5rem;
+    /* Odstęp pod tytułem (9px) */
+}
+
+.footer-logo p {
+    opacity: 0.7;
+    /* 70% przezroczystości (jaśniejszy tekst) */
+    line-height: 1.6;
+    /* Odstęp między liniami */
+}
+
+.footer-links h4,
+.footer-contact h4 {
+    font-size: 1.2rem;
+    /* Rozmiar podtytułów */
+    font-weight: 700;
+    /* Pogrubienie */
+    margin-bottom: var(--spacing-sm);
+    /* Odstęp pod tytułem (16px) */
+}
+
+.footer-links ul {
+    list-style: none;
+    /* Usuń kropki */
+}
+
+.footer-links a {
+    color: var(--color-white);
+    /* Biały tekst linku */
+    text-decoration: none;
+    /* Bez podkreślenia */
+    opacity: 0.7;
+    /* 70% opacity (jaśniejszy) */
+    transition: all var(--transition-fast);
+    /* Płynne animacje */
+    display: inline-block;
+    /* Inline-block pozwala na transform */
+    padding: 0.3rem 0;
+    /* Padding góra/dół (5.4px) */
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    /* Przy hover: pełna opacity (100% = jasniejszy) */
+    transform: translateX(5px);
+    /* Przy hover: przesuń 5px w prawo */
+}
+
+.contact-text {
+    opacity: 0.7;
+    /* 70% przezroczystości */
+    margin-bottom: var(--spacing-md);
+    /* Odstęp pod tekstem */
+}
+
+.social-links {
+    display: flex;
+    /* Flexbox - ikony obok siebie */
+    gap: var(--spacing-sm);
+    /* Odstęp między ikonami (16px) */
+    margin-top: var(--spacing-md);
+    /* Odstęp nad linkami */
+}
+
+.social-link {
+    width: 44px;
+    /* Szerokość przycisku */
+    height: 44px;
+    /* Wysokość przycisku */
+    display: flex;
+    /* Flexbox do centrowania ikony */
+    align-items: center;
+    /* Wyśrodkuj w pionie */
+    justify-content: center;
+    /* Wyśrodkuj w poziomie */
+    background: rgba(255, 255, 255, 0.1);
+    /* Delikatne białe tło */
+    border-radius: 50%;
+    /* Okrągły kształt */
+    color: var(--color-white);
+    /* Biały kolor ikony */
+    transition: all var(--transition-medium);
+    /* Płynne animacje */
+    text-decoration: none;
+    /* Bez podkreślenia */
+}
+
+.social-link:hover {
+    background: var(--color-blue);
+    /* Niebieski przy hover */
+    transform: translateY(-3px);
+    /* Przesuń w górę */
+    box-shadow: 0 4px 12px rgba(46, 49, 146, 0.3);
+    /* Cień przy hover */
+}
+
+.social-link svg {
+    width: 20px;
+    /* Szerokość ikony SVG */
+    height: 20px;
+    /* Wysokość ikony SVG */
+}
+
+.footer-bottom {
+    text-align: center;
+    /* Wyśrodkuj tekst */
+    padding-top: var(--spacing-md);
+    /* Padding nad (32px) */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Cienka linia nad (10% białego) */
+    opacity: 0.6;
+    /* 60% opacity (delikatny tekst copyright) */
+}
+
+/* ========================================
+   Responsive Design (Design responsywny - dopasowanie do mobile)
+   ======================================== */
+@media (max-width: 1024px) {
+
+    /* Dla ekranów mniejszych niż 1024px (tablety) */
+    .about-content {
+        grid-template-columns: 1fr;
+        /* Jedna kolumna zamiast dwóch (zdjęcie nad tekstem) */
+        gap: var(--spacing-lg);
+        /* Mniejszy odstęp (64px) */
+    }
+
+    .about-image {
+        height: 400px;
+        /* Niższe zdjęcie na tabletach */
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Dla ekranów mniejszych niż 768px (telefony) */
+    :root {
+        --spacing-lg: 2rem;
+        /* Mniejsze odstępy na mobile */
+        --spacing-xl: 3rem;
+        --spacing-xxl: 4rem;
+        --spacing-xxxl: 5rem;
+    }
+
+    body {
+        font-size: 16px;
+        /* Mniejszy bazowy font na mobile */
+    }
+
+    .hamburger {
+        display: flex;
+        /* Pokaż hamburger menu na mobile */
+    }
+
+    .nav-menu {
+        position: fixed;
+        /* Menu przyklejone */
+        top: 80px;
+        /* Pod navbarem */
+        left: -100%;
+        /* Początkowo schowane za lewą krawędzią */
+        width: 100%;
+        /* Pełna szerokość */
+        background: rgba(255, 255, 255, 0.98);
+        /* Białe tło */
+        flex-direction: column;
+        /* Linki w kolumnie */
+        padding: var(--spacing-md);
+        /* Padding (32px) */
+        box-shadow: var(--shadow-md);
+        /* Cień */
+        transition: left var(--transition-medium);
+        /* Płynne wysuwanie */
+    }
+
+    .nav-menu.active {
+        left: 0;
+        /* Gdy aktywne: wysuń na ekran */
+    }
+
+    .hero {
+        min-height: 80vh;
+        /* Niższy hero na mobile (80% wysokości ekranu) */
+        padding: var(--spacing-xl) 0;
+        /* Mniejszy padding (96px góra/dół) */
+    }
+
+    .hero-title {
+        letter-spacing: -2px;
+        /* Zbliżone litery */
+    }
+
+    .hero-logo {
+        width: 100px;
+        /* Mniejsze logo na mobile */
+        height: 100px;
+    }
+
+    .countdown {
+        gap: var(--spacing-sm);
+        /* Mniejszy odstęp na mobile (16px) */
+    }
+
+    .countdown-number {
+        font-size: clamp(2rem, 8vw, 3rem);
+        /* Mniejsze liczby na mobile */
+    }
+
+    .countdown-separator {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        /* Mniejszy separator */
+    }
+
+    .section-label {
+        display: none;
+        /* Ukryj pionowe etykiety na mobile */
+    }
+
+    .about-content {
+        padding: 0 var(--spacing-md);
+        /* Mniejszy padding */
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+        /* Jedna kolumna na mobile (karty pod sobą) */
+    }
+
+    .detail-icon {
+        margin: 0 auto;
+        /* Wyśrodkuj ikonę (redundantne ale dla pewności) */
+    }
+
+    .partners-grid {
+        grid-template-columns: 1fr;
+        /* Jedna kolumna partnerów (jeden pod drugim) */
+    }
+
+    .edition-stats {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 kolumny na mobile zamiast 4 */
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        /* Mniejsze liczby na mobile */
+    }
+
+    .edition-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 zdjęcia obok siebie na mobile */
+    }
+
+    .organizer-card {
+        grid-template-columns: 1fr;
+        /* Jedna kolumna - logo nad tekstem */
+        text-align: center;
+        /* Wyśrodkuj tekst */
+    }
+
+    .organizer-image {
+        margin: 0 auto;
+        /* Wyśrodkuj logo */
+    }
+
+    .registration-status,
+    .registration-form-placeholder {
+        padding: var(--spacing-lg);
+        /* Mniejszy padding na mobile (64px) */
+    }
+
+    .registration-form-placeholder {
+        min-height: 200px;
+        /* Niższy placeholder na mobile */
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        /* Jedna kolumna w stopce */
+        text-align: center;
+        /* Wyśrodkuj tekst */
+    }
+
+    .social-links {
+        justify-content: center;
+        /* Wyśrodkuj ikony social media */
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Dla bardzo małych ekranów (małe telefony) */
+    .container {
+        padding: 0 var(--spacing-md);
+        /* Jeszcze mniejszy padding */
+    }
+
+    .nav-container {
+        padding: 1.5rem var(--spacing-md);
+        /* Mniejszy padding navbar */
+    }
+
+    .cta-button {
+        padding: 1rem 2rem;
+        /* Mniejszy przycisk */
+        font-size: 0.9rem;
+        /* Mniejszy tekst przycisku */
+    }
+
+    .partner-info-card,
+    .current-partners {
+        padding: var(--spacing-lg) var(--spacing-md);
+        /* Mniejszy padding */
+    }
+}
+
+/* ========================================
+   Utility Classes (Klasy narzędziowe)
+   ======================================== */
+.fade-in {
+    opacity: 0;
+    /* Początkowo niewidoczne */
+    animation: fadeIn 1s ease forwards;
+    /* Animacja pojawienia się (1 sekunda) */
+}
+
+@keyframes fadeIn {
+
+    /* Definicja animacji fadeIn */
+    to {
+        /* Końcowy stan */
+        opacity: 1;
+        /* Pełna widoczność */
+    }
+}
